@@ -1,0 +1,22 @@
+// @ts-check
+import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+
+// https://astro.build/config
+export default defineConfig({
+  site: 'https://mop-insite.com',
+  output: 'static',
+  build: {
+    format: 'directory'
+  },
+  trailingSlash: 'ignore',
+  integrations: [
+    sitemap({
+      serialize(item) {
+        return item;
+      },
+      customPages: [],
+      filter: (page) => true,
+    })
+  ]
+});
