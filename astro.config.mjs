@@ -8,7 +8,8 @@ export default defineConfig({
   base: '/',
   output: 'static',
   build: {
-    format: 'directory'
+    format: 'directory',
+    assets: '_guidebook_assets'
   },
   trailingSlash: 'ignore',
   integrations: [
