@@ -46,16 +46,20 @@ export function generateWebPageSchema(
 
 export function generateTouristAttractionSchema(
   guideData: GuideItem,
-  language: 'en' | 'zh-tw',
+  language: 'en' | 'zh-tw' | 'ko',
   url: string
 ) {
   const name = language === 'zh-tw'
     ? (guideData.name_zh_tw || guideData.name_ja)
-    : (guideData.name_en || guideData.name_ja);
+    : language === 'ko'
+      ? (guideData.name_ko || guideData.name_ja)
+      : (guideData.name_en || guideData.name_ja);
 
   const description = language === 'zh-tw'
     ? (guideData.summary_zh_tw || guideData.summary_ja)
-    : (guideData.summary_en || guideData.summary_ja);
+    : language === 'ko'
+      ? (guideData.summary_ko || guideData.summary_ja)
+      : (guideData.summary_en || guideData.summary_ja);
 
   const schema: any = {
     "@context": "https://schema.org",
@@ -69,10 +73,12 @@ export function generateTouristAttractionSchema(
     schema.image = guideData.main_image_url;
   }
 
-  if (guideData.address_en || guideData.address_zh_tw) {
+  if (guideData.address_en || guideData.address_zh_tw || guideData.address_ko) {
     const address = language === 'zh-tw'
       ? (guideData.address_zh_tw || guideData.address_en)
-      : (guideData.address_en || guideData.address_zh_tw);
+      : language === 'ko'
+        ? (guideData.address_ko || guideData.address_en)
+        : (guideData.address_en || guideData.address_zh_tw);
 
     if (address) {
       schema.address = {
@@ -91,11 +97,13 @@ export function generateTouristAttractionSchema(
 export function generateHreflangTags(
   enUrl: string,
   zhTwUrl: string,
+  koUrl: string,
   currentUrl: string
 ) {
   return [
     { rel: 'alternate', hreflang: 'en', href: enUrl },
     { rel: 'alternate', hreflang: 'zh', href: zhTwUrl },
+    { rel: 'alternate', hreflang: 'ko', href: koUrl },
     { rel: 'alternate', hreflang: 'x-default', href: enUrl },
     { rel: 'canonical', href: currentUrl }
   ];

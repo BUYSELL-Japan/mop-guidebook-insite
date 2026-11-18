@@ -8,7 +8,8 @@ export interface LanguageConfig {
 
 export const languages: LanguageConfig[] = [
   { code: 'zh-tw', name: '繁體中文', flag: '🇹🇼' },
-  { code: 'en', name: 'English', flag: '🇺🇸' }
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'ko', name: '한국어', flag: '🇰🇷' }
 ];
 
 export const defaultLanguage: Language = 'zh-tw';
@@ -16,6 +17,8 @@ export const defaultLanguage: Language = 'zh-tw';
 export function getLanguageFromPath(pathname: string): Language {
   if (pathname.startsWith('/zh-tw') || pathname.startsWith('/zh/')) {
     return 'zh-tw';
+  } else if (pathname.startsWith('/ko/')) {
+    return 'ko';
   } else if (pathname.startsWith('/en')) {
     return 'en';
   }
@@ -26,7 +29,7 @@ export function getLocalizedPath(path: string, language: Language): string {
   const safePath = path || '/';
 
   // Remove language prefix from current path
-  const cleanPath = safePath.replace(/^\/(zh-tw|zh|en)(\/guidebook)?(\/|$)/, '/');
+  const cleanPath = safePath.replace(/^\/(zh-tw|zh|en|ko)(\/guidebook)?(\/|$)/, '/');
 
   // Determine the base path based on whether it's a guidebook path
   const isGuidebook = safePath.includes('/guidebook');
@@ -77,6 +80,8 @@ export interface GuideItem {
   meta_title_en: string;
   meta_description_zh_tw: string;
   meta_description_en: string;
+  meta_title_ko: string;
+  meta_description_ko: string;
 }
 
 export function getLocalizedText(item: GuideItem, field: keyof GuideItem, language: Language): string {
@@ -164,7 +169,7 @@ export const translations = {
     highlights: '하이라이트',
     access: '교통',
     viewOtherSpots: '다른 명소 보기',
-    home: '홈페이지',
+    home: '홈',
     viewDetail: '자세히 보기',
     loadingError: '데이터 가져오기 실패',
     loadingNote: '오키나와의 아름다운 풍경을 기다려주세요...',

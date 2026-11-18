@@ -18,9 +18,9 @@ export default defineConfig({
         return item;
       },
       customPages: [],
-      // Only list guidebook pages. "/" belongs to the map app, /debug/ is internal,
+      // Only list guidebook pages (en / zh / ko). "/" belongs to the map app, /debug/ is internal,
       // and legacy /en/guide/* pages canonicalize to /en/guidebook/*.
-      filter: (page) => /^https:\/\/mop-insite\.com\/(en|zh)\/guidebook\//.test(page),
+      filter: (page) => /^https:\/\/mop-insite\.com\/(en|zh|ko)\/guidebook\//.test(page),
     })
   ]
 });

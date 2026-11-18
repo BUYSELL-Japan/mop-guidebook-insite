@@ -15,11 +15,15 @@ const currentLanguage = getLanguageFromPath(Astro.url.pathname);
 
 const defaultTitle = currentLanguage === 'zh-tw'
   ? '沖繩旅遊指南 | 發現美麗島嶼的魅力'
-  : 'Okinawa Guidebook | Discover the Charm of Beautiful Islands';
+  : currentLanguage === 'ko'
+    ? '오키나와 가이드북 | 아름다운 섬의 매력을 발견하세요'
+    : 'Okinawa Guidebook | Discover the Charm of Beautiful Islands';
 
 const defaultDescription = currentLanguage === 'zh-tw'
   ? '為您介紹沖繩的美麗風景、豐富文化和溫馨體驗。'
-  : 'Introducing the beautiful scenery, rich culture, and heartwarming experiences of Okinawa.';
+  : currentLanguage === 'ko'
+    ? '오키나와의 아름다운 풍경, 풍부한 문화, 그리고 따뜻한 경험을 소개합니다.'
+    : 'Introducing the beautiful scenery, rich culture, and heartwarming experiences of Okinawa.';
 
 const pageTitle = title || defaultTitle;
 const pageDescription = description || defaultDescription;

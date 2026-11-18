@@ -92,7 +92,9 @@ export async function fetchGuideData() {
             meta_title_zh_tw: props.meta_title_zh_tw || '',
             meta_title_en: props.meta_title_en || '',
             meta_description_zh_tw: props.meta_description_zh_tw || '',
-            meta_description_en: props.meta_description_en || ''
+            meta_description_en: props.meta_description_en || '',
+            meta_title_ko: props.meta_title_ko || '',
+            meta_description_ko: props.meta_description_ko || ''
           };
         });
     } else if (Array.isArray(data)) {
